@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: covid-19-exporter
+spec:
+  destination:
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: deploy/bases/local
+    repoURL: 'https://github.com/covid19-aggregator/coronavirus-covid19/'
+    targetRevision: HEAD
+  project: coronavirus
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
